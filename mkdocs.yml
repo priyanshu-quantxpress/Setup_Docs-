@@ -1,0 +1,35 @@
+site_name: Bull_setup Docs
+site_description: Official setup and installation documentation
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.top
+    - navigation.tracking
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - search
+
+nav:
+  - Introduction: index.md
+
+  - Requirements:
+      - Overview: requirements/index.md
+      - Hardware Requirements: requirements/hardware.md
+      - Software Requirements: requirements/software.md
+      - Third Party Services: requirements/third-party.md
+
+  - Steps to Setup: steps.md
+
+  - Setup Guide:
+      - Setting Up Python: setup/guide/python.md
+      - Setting Up Docker: setup/guide/docker.md
+      - Setting up Core Services: setup/guide/CoreServices.md
+      - Registering Instrument into Redis: setup/guide/InstrumentRegister.md
+      - Setting up Blitz-Gateway: setup/guide/gateway.md 
+      - TPOMS: setup/guide/TPOMS.md
+           
