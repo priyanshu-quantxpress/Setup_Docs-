@@ -1,0 +1,1274 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Official setup and installation documentation">
+      
+      
+      
+      
+        <link rel="prev" href="../docker/">
+      
+      
+        <link rel="next" href="../InstrumentRegister/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Setting up Core Services - Bull_setup Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setting-up-core-servicesmysql-redis-nats-clickhouse-postgresql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Bull_setup Docs" class="md-header__button md-logo" aria-label="Bull_setup Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bull_setup Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setting up Core Services
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bull_setup Docs" class="md-nav__button md-logo" aria-label="Bull_setup Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bull_setup Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Requirements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third Party Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steps to Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting Up Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting Up Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up Core Services
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up Core Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-core-servicesmysql-redis-nats-clickhouse-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up Core Services(MySql, Redis, Nats, ClickHouse, PostgreSql)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offline-initialization-of-third-party-services-using-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline Initialization of Third-Party Services Using Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-prepare-docker-images-on-windows-internet-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 1 — Prepare Docker Images on Windows (Internet Machine)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 1 — Prepare Docker Images on Windows (Internet Machine)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pull-required-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull Required Docker Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-images-if-not-already-exported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Images (if not already exported)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-files-to-linux-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy Files to Linux Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-load-docker-images-on-linux-offline-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 2 — Load Docker Images on Linux (Offline Server)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 2 — Load Docker Images on Linux (Offline Server)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load Docker Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-loaded-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Loaded Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-run-docker-compose-offline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 3 — Run Docker Compose Offline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 3 — Run Docker Compose Offline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-docker-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Docker Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-verify-running-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 4 — Verify Running Containers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 4 — Verify Running Containers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-container-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check Container Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InstrumentRegister/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registering Instrument into Redis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up Blitz-Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TPOMS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TPOMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-core-servicesmysql-redis-nats-clickhouse-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up Core Services(MySql, Redis, Nats, ClickHouse, PostgreSql)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offline-initialization-of-third-party-services-using-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline Initialization of Third-Party Services Using Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-prepare-docker-images-on-windows-internet-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 1 — Prepare Docker Images on Windows (Internet Machine)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 1 — Prepare Docker Images on Windows (Internet Machine)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pull-required-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull Required Docker Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-images-if-not-already-exported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Images (if not already exported)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-files-to-linux-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy Files to Linux Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-load-docker-images-on-linux-offline-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 2 — Load Docker Images on Linux (Offline Server)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 2 — Load Docker Images on Linux (Offline Server)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load Docker Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-loaded-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Loaded Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-run-docker-compose-offline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 3 — Run Docker Compose Offline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 3 — Run Docker Compose Offline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-docker-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Docker Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-verify-running-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PART 4 — Verify Running Containers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PART 4 — Verify Running Containers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-container-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check Container Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Setting up Core Services</h1>
+
+<h2 id="setting-up-core-servicesmysql-redis-nats-clickhouse-postgresql">Setting up Core Services(MySql, Redis, Nats, ClickHouse, PostgreSql)</h2>
+<p>This section covers the <strong>initialization of Core services</strong> required by the system before the main application components are deployed. These services provide the core infrastructure layer responsible for data storage, caching, messaging, and analytics, and must be configured and running correctly to ensure overall system stability and performance.</p>
+<p>The initialization process is managed using a dedicated Docker Compose configuration file:</p>
+<pre><code>docker-compose-init.yml
+</code></pre>
+<p>Using this compose file ensures that all foundational services are started in a controlled and consistent manner, allowing the application stack to connect to reliable dependencies from the beginning.</p>
+<p>The services initialized in this phase include:</p>
+<ul>
+<li><strong>MySQL</strong> — Primary relational database for transactional data.</li>
+<li><strong>Redis</strong> — In-memory data store used for caching and fast data access.</li>
+<li><strong>NATS</strong> — Lightweight messaging system for event-driven communication.</li>
+<li><strong>ClickHouse</strong> — High-performance analytical database for large-scale data processing.</li>
+<li><strong>PostgreSQL (TimescaleDB)</strong> — Time-series database component requiring manual setup and configuration.</li>
+</ul>
+<p>By completing this initialization phase first, the environment is prepared to support application services, background jobs, and analytics workflows in a predictable and maintainable way.</p>
+<h2 id="offline-initialization-of-third-party-services-using-docker">Offline Initialization of Third-Party Services Using Docker</h2>
+<p>This guide explains how to prepare and run required third-party services on a Linux server <strong>without internet access</strong>. Docker images are downloaded on a Windows machine with internet connectivity, transferred to the Linux server, and then loaded and started offline.</p>
+<hr />
+<h2 id="part-1-prepare-docker-images-on-windows-internet-machine">PART 1 — Prepare Docker Images on Windows (Internet Machine)</h2>
+<p>On your <strong>Windows</strong> machine:</p>
+<h3 id="pull-required-docker-images">Pull Required Docker Images</h3>
+<p>Open terminal (PowerShell / CMD) and run:</p>
+<pre><code class="language-bash">docker pull redis:latest
+docker pull nats:latest
+docker pull mysql:latest
+docker pull clickhouse/clickhouse-server:latest
+</code></pre>
+<hr />
+<h3 id="export-images-if-not-already-exported">Export Images (if not already exported)</h3>
+<p>Save images as <code>.tar</code> files for offline transfer:</p>
+<pre><code class="language-bash">docker save -o redis_latest.tar redis:latest
+docker save -o nats_latest.tar nats:latest
+docker save -o mysql_latest.tar mysql:latest
+docker save -o clickhouse_latest.tar clickhouse/clickhouse-server:latest
+</code></pre>
+<hr />
+<h3 id="copy-files-to-linux-server">Copy Files to Linux Server</h3>
+<p>Using <strong>WinSCP</strong>, transfer the following files:</p>
+<pre><code>redis_latest.tar
+nats_latest.tar
+mysql_latest.tar
+clickhouse_latest.tar
+docker-compose-init.yml
+mysql_create_table_schema.txt
+mysql/initdb/
+clickhouse-init/
+clickhouse-config/
+docker-compose-init.yml
+</code></pre>
+<p>Target directory on Linux:</p>
+<pre><code>/opt/app/
+</code></pre>
+<hr />
+<h2 id="part-2-load-docker-images-on-linux-offline-server">PART 2 — Load Docker Images on Linux (Offline Server)</h2>
+<p>Login to Linux using <strong>PuTTY</strong> and navigate to the directory:</p>
+<pre><code class="language-bash">cd /opt/app
+</code></pre>
+<h3 id="load-docker-images">Load Docker Images</h3>
+<pre><code class="language-bash">docker load -i redis_latest.tar
+docker load -i nats_latest.tar
+docker load -i mysql_latest.tar
+docker load -i clickhouse_latest.tar
+</code></pre>
+<hr />
+<h3 id="verify-loaded-images">Verify Loaded Images</h3>
+<pre><code class="language-bash">docker images
+</code></pre>
+<p>You should see:</p>
+<pre><code>redis
+nats
+mysql
+clickhouse/clickhouse-server
+</code></pre>
+<hr />
+<h2 id="part-3-run-docker-compose-offline">PART 3 — Run Docker Compose Offline</h2>
+<h3 id="verify-docker-installation">Verify Docker Installation</h3>
+<pre><code class="language-bash">docker --version
+docker-compose --version
+</code></pre>
+<hr />
+<h3 id="start-services">Start Services</h3>
+<pre><code class="language-bash">docker-compose -f docker-compose-init.yml up -d
+</code></pre>
+<p>If containers already exist:</p>
+<pre><code class="language-bash">docker-compose down
+docker-compose -f docker-compose-init.yml up -d
+</code></pre>
+<hr />
+<h2 id="part-4-verify-running-containers">PART 4 — Verify Running Containers</h2>
+<h3 id="check-container-status">Check Container Status</h3>
+<pre><code class="language-bash">docker ps
+</code></pre>
+<p>Expected running containers:</p>
+<pre><code>blitz_redis
+blitz_nats
+blitz_mysql
+blitz_clickhouse
+</code></pre>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>This process enables a complete <strong>offline initialization</strong> of infrastructure services using Docker:</p>
+<ul>
+<li>Redis (Caching)</li>
+<li>NATS (Messaging)</li>
+<li>MySQL (Primary Database)</li>
+<li>ClickHouse (Analytics Database)</li>
+</ul>
+<p>By preparing images on an internet-connected system and deploying them offline, you ensure repeatable, secure, and controlled environment setup suitable for restricted or production-grade infrastructure.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.top", "navigation.tracking", "content.code.copy", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

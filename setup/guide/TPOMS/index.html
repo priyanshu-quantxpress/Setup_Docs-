@@ -1,0 +1,1396 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Official setup and installation documentation">
+      
+      
+      
+      
+        <link rel="prev" href="../gateway/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>TPOMS - Bull_setup Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tp-oms-configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Bull_setup Docs" class="md-header__button md-logo" aria-label="Bull_setup Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bull_setup Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TPOMS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bull_setup Docs" class="md-nav__button md-logo" aria-label="Bull_setup Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bull_setup Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Requirements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requirements/third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third Party Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steps to Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting Up Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting Up Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CoreServices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up Core Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InstrumentRegister/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registering Instrument into Redis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up Blitz-Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TPOMS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TPOMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tp-oms-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TP OMS Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kite-zerodha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 Kite (Zerodha)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 Kite (Zerodha)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Login Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mofl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 MOFL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 MOFL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 XTS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 XTS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tp-oms-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TP OMS Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kite-zerodha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 Kite (Zerodha)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 Kite (Zerodha)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Login Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mofl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 MOFL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 MOFL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 XTS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 XTS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-inputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>TPOMS</h1>
+
+<!-- "TPOMS": [
+  {
+    "tpOmsName": "Kite",
+    "icons": "PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MCA2MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmNjQ2MWE7fS5jbHMtMntmaWxsOiNkYjM0MmM7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5LaXRlIGxvZ28gdHJpbW1lZDwvdGl0bGU+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjMwIDAgMCAzMCAzMCA2MCA2MCAzMCA5MCAwIDMwIDAiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzAgNjAgNjAgMzAgOTAgNjAgMzAgNjAiLz48L3N2Zz4=",
+    "selfLogin": true,
+    "loginConfig": {
+      "loginUrl": "https://kite.zerodha.com/connect/login",
+      "tokenUrl": "https://api.kite.trade/session/token"
+    },
+    "inputs": [
+      {
+
+        "name": "UserId",
+        "label": "User ID",
+        "type": "text",
+        "required": true,
+        "minLength": 3
+      },
+   {
+        "name": "Password",
+        "label": "Password",
+        "type": "password",
+        "required": true
+      },
+      {
+        "name": "ApiKey",
+        "label": "API Key",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "ApiSecret",
+        "label": "API Secret",
+        "type": "password",
+        "required": true
+      },
+   {
+        "name": "TotpSecret",
+        "label": "TOTP Secret",
+        "type": "password",
+        "required": true
+      },
+      {
+        "name": "PrimaryIpAddress",
+        "label": "Primary IP Address",
+        "type": "ipAddress",
+        "required": true
+      },
+      {
+        "name": "SecondaryIpAddress",
+        "label": "Secondary IP Address",
+        "type": "ipAddress",
+        "required": true
+      },
+      {
+        "name": "RedirectUrl",
+        "label": "Redirect URL",
+        "type": "text",
+        "required": true,
+        "default": "http://localhost:8080/"
+      }
+    ]
+  },
+  {
+    "tpOmsName": "MOFL",
+    "icons": "PHN2ZyB3aWR0aD0iMTAzIiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNTMgMzIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE2IDMyQzcuMTc3OSAzMiAwIDI0LjgyMjEgMCAxNkMwIDcuMTc3ODkgNy4xNzc5IDAgMTYgMEMyMS42MjgyIDAgMjYuOTA3NCAzLjAxMjExIDI5Ljc3NzMgNy44NjAxN0MyOS45NjA1IDguMTY5NTggMjkuODU4IDguNTY4MjQgMjkuNTQ5MiA4Ljc1MTM3QzI5LjIzOTggOC45MzQ1MSAyOC44NDEyIDguODMyMDMgMjguNjU4IDguNTIzMjhDMjYuMDIwOCA0LjA2ODU5IDIxLjE3MDcgMS4zMDExIDE2IDEuMzAxMUM3Ljg5NTIyIDEuMzAxMSAxLjMwMTExIDcuODk0NTUgMS4zMDExMSAxNkMxLjMwMTExIDI0LjEwNTQgNy44OTQ1NiAzMC42OTg5IDE2IDMwLjY5ODlDMjEuMTcwNyAzMC42OTg5IDI2LjAyMDggMjcuOTMxNCAyOC42NTggMjMuNDc2N0MyOC44NDEyIDIzLjE2NzMgMjkuMjQwNSAyMy4wNjU1IDI5LjU0OTIgMjMuMjQ4NkMyOS44NTg2IDIzLjQzMTggMjkuOTYwNSAyMy44MzA0IDI5Ljc3NzMgMjQuMTM5OEMyNi45MDY3IDI4Ljk4NzkgMjEuNjI3NiAzMiAxNiAzMloiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl82NzM3XzYwNikiPjwvcGF0aD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNS41NjQ2MyAxNC44MTI3VjE0LjUxNThMOC41NjI4NSAxMy45NTE5VjE1LjMxNzhDOC43ODU2NiAxNC41NDYzIDkuNTcyNCAxMy45NTE5IDEwLjc0NDYgMTMuOTUxOUMxMS42MjA2IDEzLjk1MTkgMTIuMzAyOSAxNC4yOTMgMTIuNTU1NCAxNS4yODhDMTIuNzkyOCAxNC41MTU4IDEzLjU3OTUgMTMuOTUxOSAxNC43MjI2IDEzLjk1MTlDMTUuODY1NyAxMy45NTE5IDE2LjYzNzIgMTQuNDg2MSAxNi42MzcyIDE2LjIyMjlWMjAuMDUyOEMxNi42MzcyIDIwLjMxOTkgMTYuNzI2NSAyMC42NjE3IDE3LjIzMDkgMjAuNjYxN1YyMC45NTg2SDEzLjc4NzFWMjAuNjYxN0MxNC4yOTE2IDIwLjY2MTcgMTQuMzgwOCAyMC4zMjA2IDE0LjM4MDggMjAuMDUyOFYxNi4yODI0QzE0LjM4MDggMTUuNDM2MSAxNC4wODQgMTUuMTM5MyAxMy41Nzk1IDE1LjEzOTNDMTMuMTkzNCAxNS4xMzkzIDEyLjgyMjUgMTUuMzQ2OSAxMi42MTQ5IDE1LjY3MzVDMTIuNjQ0NyAxNS44NTEzIDEyLjY1OTIgMTYuMDI5OCAxMi42NTkyIDE2LjIyMjlWMjAuMDUyOEMxMi42NTkyIDIwLjMxOTkgMTIuNzQ4NSAyMC42NjE3IDEzLjI1MjkgMjAuNjYxN1YyMC45NTg2SDkuODA5MDlWMjAuNjYxN0MxMC4zMTM1IDIwLjY2MTcgMTAuNDAyOCAyMC4zMjA2IDEwLjQwMjggMjAuMDUyOFYxNi4yODI0QzEwLjQwMjggMTUuNDM2MSAxMC4xMDU5IDE1LjEzOTMgOS42MDE0OSAxNS4xMzkzQzkuMTQxMzQgMTUuMTM5MyA4LjY5NTc0IDE1LjQ1MDcgOC41NjIxOSAxNS44ODE3VjIwLjA1MjhDOC41NjIxOSAyMC4zMTk5IDguNjY1OTkgMjAuNjYxNyA5LjE1NTg5IDIwLjY2MTdWMjAuOTU4Nkg1LjcyNzI2VjIwLjY2MTdDNi4yMTcxNiAyMC42NjE3IDYuMzIwOTYgMjAuMzIwNiA2LjMyMDk2IDIwLjA1MjhWMTUuNzQ4MkM2LjMyMDk2IDE1LjI0MzggNi4xODc0MSAxNC45NjE0IDUuNTYzOTYgMTQuODEzNEw1LjU2NDYzIDE0LjgxMjdaIiBmaWxsPSIjMkIyRThDIj48L3BhdGg+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE4LjI3MSAxNy41Mjg1QzE4LjI3MSAxNS41NjkgMTkuMzg0MyAxMy45NTEyIDIxLjkwNzkgMTMuOTUxMkMyNC40MzE0IDEzLjk1MTIgMjUuNTI5NSAxNS41NjkgMjUuNTI5NSAxNy41Mjg1QzI1LjUyOTUgMTkuNDg4MSAyNC40MzE0IDIxLjEwNTkgMjEuOTA3OSAyMS4xMDU5QzE5LjM4NDMgMjEuMTA1OSAxOC4yNzEgMTkuNDg4MSAxOC4yNzEgMTcuNTI4NVpNMjMuMDk1MyAxNy41Mjg1QzIzLjA5NTMgMTQuODQxNyAyMi43OTg0IDE0LjI0OCAyMS45MDc5IDE0LjI0OEMyMS4wMTczIDE0LjI0OCAyMC43MDUzIDE0Ljg0MTcgMjAuNzA1MyAxNy41Mjg1QzIwLjcwNTMgMjAuMjE1NCAyMS4wMTY3IDIwLjgwOTEgMjEuOTA3OSAyMC44MDkxQzIyLjc5OTEgMjAuODA5MSAyMy4wOTUzIDIwLjIxNTQgMjMuMDk1MyAxNy41Mjg1WiIgZmlsbD0iIzJCMkU4QyI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yOS43NTkyIDE4LjcwMTRMMzAuMDI2MyAxOC4wNzhMMzIuOTgwMiAxMC41MDgxSDMzLjExMzhMMzYuOTQzNyAxOS40NTg0QzM3LjQwMzkgMjAuNTI3NSAzNy45Njc4IDIwLjY2MSAzOC4zMDk2IDIwLjY2MVYyMC45NTc5SDMzLjQ3MDhWMjAuNjYxQzMzLjk0NTUgMjAuNjYxIDM0LjA5NDMgMjAuMzkzOSAzNC4wOTQzIDIwLjA2NzNDMzQuMDk0MyAxOS43NDA3IDMzLjg1NjkgMTkuMjIxMSAzMy43NTMxIDE4Ljk4MzdMMzMuMzM3MyAxOC4wNzhIMzAuMzIzOEwzMC4xMDEgMTguNzAxNEMyOS43NDQ3IDE5LjYzNjkgMjkuNTk2NiAyMC42NjEgMzEuMjI4OSAyMC42NjFWMjAuOTU3OUgyNy45MzM4VjIwLjY2MUMyOC43NjQ5IDIwLjY2MSAyOS4wNzY5IDIwLjM3ODcgMjkuNzU5OSAxOC43MDE0SDI5Ljc1OTJaTTMxLjc3ODMgMTQuMzIyOEwzMC40Mjc2IDE3Ljc4MTFIMzMuMjE4M0wzMS43NzgzIDE0LjMyMjhaIiBmaWxsPSIjMkIyRThDIj48L3BhdGg+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTM4LjYwNjcgMTAuODA0OVYxMC41MDgxSDQyLjUxMDdDNDUuNTUzOCAxMC41MDgxIDQ4LjIxMDMgMTAuOTM4NSA0OC4yMTAzIDEzLjUwNjNDNDguMjEwMyAxNi4wNzQxIDQ1LjU1MzIgMTYuNTA0NSA0Mi41MTA3IDE2LjUwNDVINDIuNDM2NlYxOS40NzNDNDIuNDM2NiAyMC4yMTU0IDQyLjc3NzggMjAuNjYwNCA0My41NSAyMC42NjA0VjIwLjk1NzJIMzguNjA3M1YyMC42NjA0QzM5LjM3ODkgMjAuNjYwNCAzOS43MjA3IDIwLjIxNDggMzkuNzIwNyAxOS40NzNWMTEuOTkxNkMzOS43MjA3IDExLjI0OTIgMzkuMzc5NSAxMC44MDQyIDM4LjYwNzMgMTAuODA0MkwzOC42MDY3IDEwLjgwNDlaTTQyLjUxMDcgMTAuODA0OUg0Mi40MzY2VjE2LjIwNzdINDIuNTEwN0M0My45OTQ5IDE2LjIwNzcgNDUuMjI3MiAxNi4wNzQxIDQ1LjIyNzIgMTMuNTA2M0M0NS4yMjcyIDEwLjkzODUgNDMuOTk0OSAxMC44MDQ5IDQyLjUxMDcgMTAuODA0OVoiIGZpbGw9IiMyQjJFOEMiPjwvcGF0aD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNDcuNzY1MSAxMC44MDQ5VjEwLjUwODFINTIuNzA3OFYxMC44MDQ5QzUxLjkzNjIgMTAuODA0OSA1MS41OTQ0IDExLjI1MDUgNTEuNTk0NCAxMS45OTIzVjE5LjQ3MzZDNTEuNTk0NCAyMC4yMTYxIDUxLjkzNTYgMjAuNjYxIDUyLjcwNzggMjAuNjYxVjIwLjk1NzlINDcuNzY1MVYyMC42NjFDNDguNTM2NyAyMC42NjEgNDguODc4NSAyMC4yMTU0IDQ4Ljg3ODUgMTkuNDczNlYxMS45OTIzQzQ4Ljg3ODUgMTEuMjQ5OCA0OC41MzczIDEwLjgwNDkgNDcuNzY1MSAxMC44MDQ5WiIgZmlsbD0iIzJCMkU4QyI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkZWZzPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfNjczN182MDYiIHgxPSI3LjA5NTkyIiB5MT0iMi4zNjYxOCIgeDI9IjI0LjQ3NSIgeTI9IjI4Ljk2NjgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0ZFQ0YwQyI+PC9zdG9wPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGQUFEMUMiPjwvc3RvcD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9saW5lYXJHcmFkaWVudD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2RlZnM+DQogICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4=",
+    "selfLogin": false,
+    "inputs": [
+      {
+        "name": "ClientId",
+        "label": "Client ID",
+        "type": "text",
+        "required": true,
+        "minLength": 3
+      },
+      {
+        "name": "Password",
+        "label": "Password",
+        "type": "password",
+        "required": true
+      },
+      {
+        "name": "ApiKey",
+        "label": "API Key",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "PrimaryIpAddress",
+        "label": "Primary IP Address",
+        "type": "ipAddress",
+        "required": true
+      },
+      {
+        "name": "SecondaryIpAddress",
+        "label": "Secondary IP Address",
+        "type": "ipAddress",
+        "required": true
+      },
+      {
+        "name": "DOB",
+        "label": "Date of Birth",
+        "type": "date",
+        "required": true,
+        "minLength": 10,
+        "maxLength": 10
+      }
+    ]
+  },
+  {
+    "tpOmsName": "XTS",
+    "icons": "",
+    "selfLogin": true,
+    "inputs": [
+      {
+        "name": "UserId",
+        "label": "User ID",
+        "type": "text",
+        "required": true,
+        "minLength": 3
+      },
+      {
+        "name": "BaseURL",
+        "label": "BaseURL",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "ApiKey",
+        "label": "API Key",
+        "type": "text",
+        "required": true
+      },
+   {
+        "name": "ApiSecret",
+        "label": "Api Secret",
+        "type": "text",
+        "required": true
+      },
+    {
+        "name": "TotpSecret",
+        "label": "Totp Secret",
+        "type": "text",
+        "required": false
+      },
+   {
+        "name": "Source",
+        "label": "Source",
+        "type": "text",
+        "required": true
+      },
+   {
+        "name": "InteractivePath",
+        "label": "Interactive Path",
+        "type": "text",
+        "required": true
+      }
+    ]
+  }
+] -->
+
+<h2 id="tp-oms-configuration">TP OMS Configuration</h2>
+<p>This section defines the supported <strong>Third-Party OMS (Order Management Systems)</strong> along with their authentication behavior and required input parameters.</p>
+<hr />
+<h2 id="kite-zerodha">🟢 Kite (Zerodha)</h2>
+<p><strong>OMS Name:</strong> Kite<br />
+<strong>Self Login:</strong> ✅ Yes  </p>
+<h3 id="login-configuration">Login Configuration</h3>
+<ul>
+<li><strong>Login URL:</strong> https://kite.zerodha.com/connect/login  </li>
+<li><strong>Token URL:</strong> https://api.kite.trade/session/token  </li>
+</ul>
+<h3 id="required-inputs">Required Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Label</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserId</td>
+<td>User ID</td>
+<td>Text</td>
+<td>✅</td>
+<td>Minimum 3 characters</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>Password</td>
+<td>Password</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>ApiKey</td>
+<td>API Key</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>ApiSecret</td>
+<td>API Secret</td>
+<td>Password</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>TotpSecret</td>
+<td>TOTP Secret</td>
+<td>Password</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>PrimaryIpAddress</td>
+<td>Primary IP Address</td>
+<td>IP Address</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>SecondaryIpAddress</td>
+<td>Secondary IP Address</td>
+<td>IP Address</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>RedirectUrl</td>
+<td>Redirect URL</td>
+<td>Text</td>
+<td>✅</td>
+<td>Default: <code>http://localhost:8080/</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mofl">🟢 MOFL</h2>
+<p><strong>OMS Name:</strong> MOFL<br />
+<strong>Self Login:</strong> ❌ No  </p>
+<h3 id="required-inputs_1">Required Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Label</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ClientId</td>
+<td>Client ID</td>
+<td>Text</td>
+<td>✅</td>
+<td>Minimum 3 characters</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>Password</td>
+<td>Password</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>ApiKey</td>
+<td>API Key</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>PrimaryIpAddress</td>
+<td>Primary IP Address</td>
+<td>IP Address</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>SecondaryIpAddress</td>
+<td>Secondary IP Address</td>
+<td>IP Address</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>DOB</td>
+<td>Date of Birth</td>
+<td>Date</td>
+<td>✅</td>
+<td>Format: <code>DD-MM-YYYY</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="xts">🟢 XTS</h2>
+<p><strong>OMS Name:</strong> XTS<br />
+<strong>Self Login:</strong> ✅ Yes  </p>
+<h3 id="required-inputs_2">Required Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Label</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserId</td>
+<td>User ID</td>
+<td>Text</td>
+<td>✅</td>
+<td>Minimum 3 characters</td>
+</tr>
+<tr>
+<td>BaseURL</td>
+<td>Base URL</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>ApiKey</td>
+<td>API Key</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>ApiSecret</td>
+<td>API Secret</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>TotpSecret</td>
+<td>TOTP Secret</td>
+<td>Text</td>
+<td>❌</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>Source</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>InteractivePath</td>
+<td>Interactive Path</td>
+<td>Text</td>
+<td>✅</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li><strong>Self Login = Yes</strong> means the OMS supports direct authentication.</li>
+<li><strong>Self Login = No</strong> means credentials are validated via an external or broker-managed flow.</li>
+<li>All fields marked <strong>Required</strong> must be provided during OMS configuration.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.top", "navigation.tracking", "content.code.copy", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
